@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flights</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+body {
+    background-color: #27496d;
+}
+
+div#flights_container {
+    padding: 50px 50px 0px 50px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #142850;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color:white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    text-decoration: none;
+    background-color: #ddd;
+}
+
+li a.active {
+    color: white;
+    text-decoration: none;
+    background-color: #00909e;
+}
+
+#add_flight {
+    margin-top: 10px;
+    position: absolute;
+    top:1%;
+    left:90%;
+    background-color: #00909e;
+    border: none;
+    color:white;
+}
+#add_flight:hover{
+    background-color:#007d8a;
+}
+#close_button{
+    position: absolute; 
+    left: 96.5%;
+    color: white;
+    background-color:red;
+    border: none;
+    width: 25px;
+    border-radius: 5px;
+    text-align: center;
+}
+#close_button:active{
+    background-color: darkred;
+}
+    </style>
+</head>
+<body>
+    <!-- <nav style = "padding: 5px 5px 0px 5px;">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Active</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+    </nav> -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Active</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+    </nav> -->
+    <!-- <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+          <img src="luggage_icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+          Current Flights
+        </a>
+    </nav> -->
+    <nav>
+        <ul>
+            <li><a class="active" href="/flights">Flights</a></li>
+            <li><a href="/helpdesk">Helpdesk</a></li>
+            <li><a href="/login">Sign out</a></li>
+            <a class="btn btn-outline-success my-2 my-sm-0" id = "add_flight" href="/add_flight">Add Flight</a>
+        </ul>
+    </nav>
+
+
+    {% for flight in flights %}
+    <div id = "flights_container">
+        <div class="card" style = "background-color: #dae1e7;">
+            <div class="card-header">
+            {{flight['name']}}
+            <a href="/delete_flight_{{flight['_id']}}"><button  type="button" id='close_button'>X</button></a>
+            </div>
+            <div class="card-body">
+            <h5 class="card-title">{{flight['from']}} to {{flight['to']}}</h5>
+            <p class="card-text">Time : {{flight['time']}}<br>
+            Date : {{flight['date']}}</p>
+            <!-- <a href="" class="btn btn-primary">Passenger Manifest</a> -->
+            <!-- TODO: implement betterr way to find luggage of flight ... -->
+            <a href="/luggage_of_{{flight['_id']}}" class="btn btn-primary">Passenger Manifest</a>
+            <a href="/knapsack_{{flight['_id']}}" class="btn btn-secondary">Calculate Containers</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

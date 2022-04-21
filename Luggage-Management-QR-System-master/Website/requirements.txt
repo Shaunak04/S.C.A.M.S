@@ -1,0 +1,12 @@
+numpy
+pandas
+matplotlib
+seaborn
+sklearn
+tk
+pymongo
+csv
+bson
+flask
+gridfd_fuse
+codecs

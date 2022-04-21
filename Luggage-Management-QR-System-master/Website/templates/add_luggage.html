@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Luggage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+body {
+    background-color: #27496d;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #142850;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color:white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    text-decoration: none;
+    background-color: #ddd;
+}
+
+li a.active {
+    color: white;
+    text-decoration: none;
+    background-color: #00909e;
+}
+
+.form_container {
+    margin: 50px 25%;
+    padding: 50px 50px 75px 50px;
+    background-color: #dae1e7;
+    border-radius: 15px;
+}
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/flights">Flights</a></li>
+            <li><a class="active" href="#news">Add Luggage</a></li>
+            <li><a href="/helpdesk">Helpdesk</a></li>
+            <li><a href="/login">Sign out</a></li>
+        </ul>
+    </nav>
+
+    <div class="form_container">
+        <form action = "" method = "post">
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label">Owner</label>
+                <div class="col-sm-10">
+                  <input name="owner" type="text" class="form-control" id="name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="weight" class="col-sm-2 col-form-label">Weight</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <input name="weight" type="number" class="form-control" step=".01" id="weight" placeholder="0" min = "0">
+                        <div class="input-group-append">
+                                <span class="input-group-text">Kg</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="width">Width</label>
+                    <div class="input-group">
+                        <input name="width" type="number" class="form-control" id="width" placeholder="0" min = "0">
+                        <div class="input-group-append">
+                            <span class="input-group-text">inches</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="height">Height</label>
+                    <div class="input-group">
+                        <input name="height" type="number" class="form-control" id="height" placeholder="0" min = "0">
+                        <div class="input-group-append">
+                            <span class="input-group-text">inches</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="breadth">Breadth</label>
+                    <div class="input-group">
+                        <input name="breadth" type="number" class="form-control" id="breadth" placeholder="0" min = "0">
+                        <div class="input-group-append">
+                            <span class="input-group-text">inches</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="flight_id" value="{{fname}}">
+            <div>
+                <button type="submit" class="btn btn-primary mb-2" style="margin-top: 10px;position: absolute;left: 45%;">Add Luggage</button>
+            </div>
+        </form>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
