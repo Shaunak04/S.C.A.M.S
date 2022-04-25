@@ -39,28 +39,43 @@ def add_luggage(fname):
                 'width': _width,
                 'breadth': _breadth
             },
-            'container_no': 0
+            'container_no': 0,
+            'scans': {
+                'scan1': {
+                    'is_scanned': False,
+                },
+                'scan2': {
+                    'is_scanned': False,
+                },
+                'scan3': {
+                    'is_scanned': False,
+                },
+                'scan4': {
+                    'is_scanned': False,
+                }
+            },
+            'total_scans': 0
         }
-        mongo_api.Luggage.insert(luggage)
+        mongo_api.Luggage.insert_one(luggage)
         luggage_id = str(mongo_api.Luggage.find_one(luggage)['_id'])
-        _name, file_png = qr_api.generate_qr(luggage_id)\
+        _name = qr_api.generate_qr(luggage_id)\
         
-        id = mongo_api.grid_fs.put(file_png)
-        metadata = {
-            'id':id,
-            'name': _name,
-        }
-        status = mongo_api.qr_db.insert(metadata)
-        if status:
-            print('Image uploaded successfully')
-        print('Image not uploaded successfully')
+        # id = mongo_api.grid_fs.put()
+        # metadata = {
+        #     'id':id,
+        #     'name': _name,
+        # }
+        # status = mongo_api.qr_db.insert_one(metadata)
+        # if status:
+        #     print('Image uploaded successfully')
+        # print('Image not uploaded successfully')
 
     return redirect(url_for('luggage_page', fname = fname))
     
 @app.route('/delete_bag_<id>_<fname>', methods =['GET', 'POST'])
 def delete_bad(id, fname):
     _id = mongo_api.get_obj_id(id)
-    mongo_api.Luggage.remove({'_id': _id})
+    mongo_api.Luggage.delete_one({'_id': _id})
     return redirect(url_for('luggage_page', fname = fname))
 
 @app.route('/flights', methods = ['GET'])
@@ -84,13 +99,13 @@ def add_flights():
             'date': str(_date),
             'time': str(_time)
         }
-        mongo_api.Flights.insert(flight)
+        mongo_api.Flights.insert_one(flight)
     return redirect(url_for('flights_page'))        
 
 @app.route('/delete_flight_<id>', methods = ['GET', 'POST'])
 def delete_flight(id):
     _id = mongo_api.get_obj_id(id)
-    mongo_api.Flights.remove({'_id': _id})
+    mongo_api.Flights.delete_one({'_id': _id})
     return redirect(url_for('flights_page'))
 
 @app.route('/login', methods = ['GET'])
@@ -112,7 +127,7 @@ def signup():
             'password': password,
             'generator':False
         }
-        mongo_api.user_db.insert(newuser)
+        mongo_api.user_db.insert_one(newuser)
         print("inserted new user")
         return redirect(url_for('login_page'))
 
@@ -208,4 +223,4 @@ def call_knapsack(id):
 
 if __name__ == '__main__':
     mongo_api.main()
-    app.run(debug = True)
+    app.run()

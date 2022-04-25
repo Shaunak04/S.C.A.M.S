@@ -23,5 +23,5 @@ def insert_msg(email, flight, msg):
             'flight' : flight,
             'msg' : msg,
         }
-        mongo_api.Complaint.insert(query)
+        mongo_api.Complaint.insert_one(query)
     csv_file.close()

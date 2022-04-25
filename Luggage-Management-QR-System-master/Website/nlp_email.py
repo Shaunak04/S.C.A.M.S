@@ -137,6 +137,8 @@ lc_emails=luggage_complaints.iloc[0:len(luggage_complaints),1]
 lc_flight=luggage_complaints.iloc[0:len(luggage_complaints),2]
 lc_message=luggage_complaints.iloc[0:len(luggage_complaints),3]
 
+print(sc_emails)
+
 #login credentials of sender's email
 qremail='qrluggage@gmail.com'
 qrpass='autoemailsend'
@@ -151,17 +153,21 @@ while typeofemail!='stop':
     if typeofemail=='staff complaint':
         sent_staff=1
 
-    msg = EmailMessage()
-    msg['Subject'] = 'Regarding ' + typeofemail + '.'
-    msg['From'] = qremail
+    # msg = EmailMessage()
+    # msg['Subject'] = 'Regarding ' + typeofemail + '.'
+    # msg['From'] = qremail
     
-    msg.add_header('Content-Type', 'text/html')
+    # msg.add_header('Content-Type', 'text/html')
     with smtplib.SMTP_SSL('smtp.gmail.com',465) as smtp:
         smtp.login(qremail,qrpass)
         c=0
         if typeofemail=='staff complaint':
             for k in range(len(sc_emails)):
+                msg = EmailMessage()
+                msg['Subject'] = 'Regarding ' + typeofemail + '.'
+                msg['From'] = qremail
                 msg['To'] = sc_emails[k]
+                msg.add_header('Content-Type', 'text/html')
                 mongo_api.Complaint.find_one_and_update(
                     {
                         'email': sc_emails[k],
@@ -181,13 +187,13 @@ while typeofemail!='stop':
                 smtp.send_message(msg)
                 print('Email sent to: '+sc_emails[k])
 
-                # filename = "csv\\staff_complaints.csv"
-                # f = open(filename, "w+")
-                # f.close()
-
         if typeofemail=='luggage complaint':
             for k in range(len(lc_emails)):
+                msg = EmailMessage()
+                msg['Subject'] = 'Regarding ' + typeofemail + '.'
+                msg['From'] = qremail
                 msg['To'] = lc_emails[k]
+                msg.add_header('Content-Type', 'text/html')
                 mongo_api.Complaint.find_one_and_update(
                     {
                         'email': lc_emails[k],
@@ -207,11 +213,3 @@ while typeofemail!='stop':
                 msg.set_payload('<h1>Dear '+str(mail)+',</h1>\n<p style="font-size: 20px">We are really sorry for inconvenience caused to you.<br> We will look into the matter and get back to you soon with an update on your ' + typeofemail + '.</p>')
                 smtp.send_message(msg)
                 print('Email sent to: '+lc_emails[k])
-
-                # filename = "csv\\luggage_complaints.csv"
-                # f = open(filename, "w+")
-                # f.close()
-
-# filename = "csv\\messages.csv"
-# f = open(filename, "w+")
-# f.close()

@@ -28,9 +28,9 @@ def main():
     global qr_db
     global grid_fs
     global helpdesk_db
-    # connection_String = "mongodb://shaunak:<password>@cluster0-shard-00-00.egwkk.mongodb.net:27017,cluster0-shard-00-01.egwkk.mongodb.net:27017,cluster0-shard-00-02.egwkk.mongodb.net:27017/test?replicaSet=Cluster0-shard-0&ssl=true&authSource=admin"
-    # client = pymongo.MongoClient(connection_String)
-    client = pymongo.MongoClient(host = 'localhost', port = 27017)
+    connection_String = "mongodb+srv://Nikhil:newpassword@cluster0.2iqos.mongodb.net/Test?retryWrites=true&w=majority"
+    client = pymongo.MongoClient(connection_String)
+    #client = pymongo.MongoClient(host = 'localhost', port = 27017)
     db = client.Tarp_project
     print("working")
     
@@ -43,3 +43,5 @@ def main():
     qr_db = db.QRs
     helpdesk_db = db.Helpdesk
     grid_fs = gridfs.GridFS(db)
+
+main()
