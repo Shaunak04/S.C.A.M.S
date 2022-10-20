@@ -3,7 +3,7 @@ import mongo_api
 import qr_api
 import helpdesk_api
 import knapsack
-
+from waitress import serve
 
 
 generator = True
@@ -220,7 +220,11 @@ def call_knapsack(id):
     return redirect(url_for('luggage_page', fname = id))
 
 
+mode="production"
 
 if __name__ == '__main__':
     mongo_api.main()
-    app.run()
+    if mode=="dev":
+        app.run()
+    else:
+        serve(app, host='0.0.0.0', port=8080)
