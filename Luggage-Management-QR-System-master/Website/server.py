@@ -56,7 +56,7 @@ def add_luggage(fname):
         }
         mongo_api.Luggage.insert_one(luggage)
         luggage_id = str(mongo_api.Luggage.find_one(luggage)['_id'])
-        _name = qr_api.generate_qr(luggage_id)\
+        _name = qr_api.generate_qr(luggage_id)
         
         # id = mongo_api.grid_fs.put()
         # metadata = {
