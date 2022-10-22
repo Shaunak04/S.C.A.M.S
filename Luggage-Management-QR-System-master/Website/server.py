@@ -3,7 +3,6 @@ import mongo_api
 import qr_api
 import helpdesk_api
 import knapsack
-from waitress import serve
 
 generator = True
 
