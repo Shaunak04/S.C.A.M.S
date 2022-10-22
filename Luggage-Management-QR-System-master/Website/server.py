@@ -6,7 +6,7 @@ import knapsack
 
 generator = True
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 #####################################################
 #                 WEBSITE API                       #
@@ -171,7 +171,8 @@ def get_favicon():
 
 @app.route('/qr_img_<id>.png', methods = ['GET'])
 def get_qr_image(id):
-    return send_file('.\\templates\\qr\\qr_img_' + str(id) + '.png')
+    print('/static/qr/qr_img_' + str(id) + '.png')
+    return send_file('static/qr/qr_img_' + str(id) + '.png')
 
 #####################################################
 #                   MONGO API                       #
@@ -225,4 +226,4 @@ if __name__ == '__main__':
     if mode=="dev":
         app.run()
     else:
-        app.run()
+        app.run(debug=True)
