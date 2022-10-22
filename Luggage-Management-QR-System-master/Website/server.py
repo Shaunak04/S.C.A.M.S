@@ -5,7 +5,6 @@ import helpdesk_api
 import knapsack
 from waitress import serve
 
-
 generator = True
 
 app = Flask(__name__)
@@ -227,4 +226,4 @@ if __name__ == '__main__':
     if mode=="dev":
         app.run()
     else:
-        serve(app, host='0.0.0.0', port=8080)
+        app.run()
