@@ -7,6 +7,7 @@ import knapsack
 generator = True
 
 app = Flask(__name__, static_url_path='/static')
+app.config['PROPAGATE_EXCEPTIONS'] = True
 
 #####################################################
 #                 WEBSITE API                       #
@@ -226,4 +227,4 @@ if __name__ == '__main__':
     if mode=="dev":
         app.run()
     else:
-        app.run(debug=True)
+        app.run()
